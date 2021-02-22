@@ -13,6 +13,9 @@ import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import static javax.persistence.CascadeType.MERGE;
+import static javax.persistence.CascadeType.PERSIST;
+
 @Entity
 public class Transacao {
     @Id
@@ -23,12 +26,12 @@ public class Transacao {
     private BigDecimal valor;
 
     @NotNull
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = {PERSIST, MERGE})
     @JoinColumn(nullable = false)
     private Cartao cartao;
 
     @NotNull
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = {PERSIST, MERGE})
     @JoinColumn(nullable = false)
     private Estabelecimento estabelecimento;
 

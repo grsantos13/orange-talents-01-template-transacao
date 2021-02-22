@@ -1,6 +1,7 @@
 package br.com.zup.transacao.kafka.evento;
 
 import br.com.zup.transacao.transacao.estabelecimento.Estabelecimento;
+import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -30,8 +31,10 @@ public class EstabelecimentoEvento {
                 " and endereco = :endereco ", Estabelecimento.class);
         query.setParameter("nome", nome).setParameter("cidade", cidade).setParameter("endereco", endereco);
         List<Estabelecimento> resultList = query.getResultList();
-        if (resultList.isEmpty())
-            return new Estabelecimento(nome, cidade, endereco);
+
+        Assert.state(resultList.size() <= 1, "Mais de um estabelecimento igual foi encontrado.");
+
+        if (resultList.isEmpty()) return new Estabelecimento(nome, cidade, endereco);
         else return resultList.get(0);
     }
 }
