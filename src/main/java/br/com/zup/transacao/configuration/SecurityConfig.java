@@ -13,6 +13,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests(authz -> authz
                     .antMatchers(HttpMethod.GET, "/transacoes/**").hasAuthority("SCOPE_transacoes:read")
+                    .antMatchers(HttpMethod.GET, "/actuator/**").permitAll()
                     .anyRequest().authenticated())
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
     }
