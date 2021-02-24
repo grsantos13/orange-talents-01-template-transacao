@@ -38,6 +38,7 @@ public class KafkaConfiguration {
         properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, kafkaProperties.getConsumer().getValueDeserializer());
         properties.put(ConsumerConfig.GROUP_ID_CONFIG, kafkaProperties.getConsumer().getGroupId());
         properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, kafkaProperties.getConsumer().getAutoOffsetReset());
+        properties.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "1");
         return properties;
     }
 
